@@ -19,7 +19,12 @@ target_link_libraries(${PROJECT_NAME}
   z
   bz2
   vitaGL
+vitashark
+mathneon
 
+SceShaccCg_stub
+SceDmacmgr_stub
+taihen_stub 
   SceDisplay_stub
   SceCtrl_stub
   SceTouch_stub
