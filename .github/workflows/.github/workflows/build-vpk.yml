@@ -1,0 +1,41 @@
+name: Build PS Vita VPK
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [ main ]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Build with VitaSDK
+        run: |
+          docker run --rm \
+            -v "$PWD:/workspace" \
+            -w /workspace \
+            vitasdk/vitasdk:2026.08 \
+            bash -lc '
+              set -euxo pipefail
+              export VITASDK=/usr/local/vitasdk
+              export PATH="$VITASDK/bin:$PATH"
+
+              cmake -S . -B build \
+                -DCMAKE_TOOLCHAIN_FILE="$VITASDK/share/vita.toolchain.cmake" \
+                -DCMAKE_BUILD_TYPE=Release
+
+              cmake --build build -j"$(nproc)"
+
+              mkdir -p dist
+              cp build/Ainda_em_Transito_Native.vpk dist/Ainda_em_Transito.vpk
+            '
+
+      - name: Upload VPK
+        uses: actions/upload-artifact@v4
+        with:
+          name: Ainda-em-Transito-PS-Vita
+          path: dist/Ainda_em_Transito.vpk
