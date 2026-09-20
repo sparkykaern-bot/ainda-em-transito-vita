@@ -15,7 +15,9 @@ set(VITA_TITLEID "AITRN0001")
 set(VITA_VERSION "01.00")
 
 add_executable(${PROJECT_NAME} src/main.cpp)
-
+target_link_options(${PROJECT_NAME} PRIVATE
+  "-Wl,-z,max-page-size=0x10000"
+)
 target_link_libraries(${PROJECT_NAME}
   SDL2_ttf
   SDL2
@@ -49,7 +51,7 @@ target_link_libraries(${PROJECT_NAME}
   m
 )
 
-vita_create_self(eboot.bin ${PROJECT_NAME})
+vita_create_self(eboot.bin ${PROJECT_NAME} UNSAFE)
 
 vita_create_vpk(Ainda_em_Transito_Native.vpk ${VITA_TITLEID} eboot.bin
   VERSION ${VITA_VERSION}
