@@ -11,6 +11,30 @@ set(VITA_APP_NAME "Ainda em Transito")
 set(VITA_TITLEID "AITRN0001")
 set(VITA_VERSION "01.00")
 add_executable(${PROJECT_NAME} src/main.cpp)
-target_link_libraries(${PROJECT_NAME} SDL2_ttf SDL2 freetype SceDisplay_stub SceCtrl_stub SceTouch_stub SceAudio_stub SceAudioIn_stub SceSysmodule_stub SceGxm_stub SceCommonDialog_stub SceAppMgr_stub ScePower_stub m)
+target_link_libraries(${PROJECT_NAME}
+  SDL2_ttf
+  SDL2
+  freetype
+  png
+  z
+  bz2
+  vitaGL
+
+  SceDisplay_stub
+  SceCtrl_stub
+  SceTouch_stub
+  SceAudio_stub
+  SceAudioIn_stub
+  SceSysmodule_stub
+  SceGxm_stub
+  SceCommonDialog_stub
+  SceAppMgr_stub
+  ScePower_stub
+  SceMotion_stub
+  SceHid_stub
+  SceIme_stub
+
+  m
+)
 vita_create_self(eboot.bin ${PROJECT_NAME})
 vita_create_vpk(Ainda_em_Transito_Native.vpk ${VITA_TITLEID} eboot.bin VERSION ${VITA_VERSION} NAME ${VITA_APP_NAME} FILE assets/NanaPixel.ttf assets/NanaPixel.ttf FILE assets/icon0.png sce_sys/icon0.png)
