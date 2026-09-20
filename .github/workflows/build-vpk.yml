@@ -24,11 +24,16 @@ jobs:
               export VITASDK=/usr/local/vitasdk
               export PATH="$VITASDK/bin:$PATH"
 
+              python3 tools/make_vita_linker.py /workspace/vita_padded.ld
+
+              rm -rf build dist
+
               cmake -S . -B build \
                 -DCMAKE_TOOLCHAIN_FILE="$VITASDK/share/vita.toolchain.cmake" \
-                -DCMAKE_BUILD_TYPE=Release
+                -DCMAKE_BUILD_TYPE=Release \
+                -DVITA_CUSTOM_LINKER_SCRIPT=/workspace/vita_padded.ld
 
-              cmake --build build -j"$(nproc)"
+              cmake --build build --verbose -j"$(nproc)"
 
               mkdir -p dist
               cp build/Ainda_em_Transito_Native.vpk dist/Ainda_em_Transito.vpk
