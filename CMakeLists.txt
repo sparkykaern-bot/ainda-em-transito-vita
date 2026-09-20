@@ -23,7 +23,7 @@ vitashark
 mathneon
 
 SceShaccCg_stub
-SceDmacmgr_stub
+SceDmac_stub
 taihen_stub 
   SceDisplay_stub
   SceCtrl_stub
