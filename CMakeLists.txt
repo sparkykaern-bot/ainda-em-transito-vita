@@ -15,11 +15,16 @@ set(VITA_TITLEID "AITRN0001")
 set(VITA_VERSION "01.00")
 
 add_executable(${PROJECT_NAME} src/main.cpp)
-target_link_options(${PROJECT_NAME} PRIVATE
-  "LINKER:-z,noseparate-code"
-  "LINKER:-z,max-page-size=0x10000"
-)
-)
+
+# O workflow gera este linker script a partir do próprio VitaSDK usado na build.
+# Isso evita depender de um script hardcoded que pode mudar entre versões do SDK.
+if(DEFINED VITA_CUSTOM_LINKER_SCRIPT AND EXISTS "${VITA_CUSTOM_LINKER_SCRIPT}")
+  message(STATUS "Using padded Vita linker script: ${VITA_CUSTOM_LINKER_SCRIPT}")
+  target_link_options(${PROJECT_NAME} PRIVATE
+    "-Wl,-T,${VITA_CUSTOM_LINKER_SCRIPT}"
+  )
+endif()
+
 target_link_libraries(${PROJECT_NAME}
   SDL2_ttf
   SDL2
