@@ -16,7 +16,9 @@ set(VITA_VERSION "01.00")
 
 add_executable(${PROJECT_NAME} src/main.cpp)
 target_link_options(${PROJECT_NAME} PRIVATE
-  "-Wl,-z,noseparate-code"
+  "LINKER:-z,noseparate-code"
+  "LINKER:-z,max-page-size=0x10000"
+)
 )
 target_link_libraries(${PROJECT_NAME}
   SDL2_ttf
