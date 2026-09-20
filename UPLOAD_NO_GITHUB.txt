@@ -1,0 +1,12 @@
+PASSO A PASSO CURTO
+
+1. Abra seu repositorio: sparkykaern-bot/ainda-em-transito-vita
+2. Clique em Add file > Upload files.
+3. EXTRAIA este ZIP primeiro no Windows.
+4. Arraste TODOS os arquivos e pastas extraidos para a pagina do GitHub.
+   IMPORTANTE: a pasta .github precisa ser enviada tambem.
+5. Clique em Commit changes.
+6. Abra a aba Actions.
+7. Abra Build PS Vita VPK.
+8. Quando ficar verde, baixe o artifact Ainda-em-Transito-PS-Vita.
+9. Extraia o artifact: dentro estará Ainda_em_Transito.vpk.
